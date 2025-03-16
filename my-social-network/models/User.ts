@@ -1,5 +1,5 @@
-import { Schema, model, Document, Types } from 'mongoose';
-import { IThought } from './Thought';
+import { Schema, model, Document, Types } from "mongoose";
+import { IThought } from "./Thought";
 
 export interface IUser extends Document {
   username: string;
@@ -21,18 +21,18 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, 'Must match a valid email address'],
+      match: [/.+@.+\..+/, "Must match a valid email address"],
     },
     thoughts: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Thought',
+        ref: "Thought",
       },
     ],
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
     ],
   },
@@ -44,10 +44,10 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-userSchema.virtual('friendCount').get(function(this: IUser) {
+userSchema.virtual("friendCount").get(function (this: IUser) {
   return this.friends.length;
 });
 
-const User = model<IUser>('User', userSchema);
+const User = model<IUser>("User", userSchema);
 
-export default User; 
+export default User;

@@ -1,30 +1,22 @@
 import { Router } from "express";
-import {
-  getThoughts,
-  getThoughtById,
-  createThought,
-  updateThought,
-  deleteThought,
-  addReaction,
-  removeReaction,
-} from "../../controllers/thoughtController";
+import thoughtController from "../../controllers/thoughtController";
 
 const router = Router();
 
 // /api/thoughts
-router.route("/").get(getThoughts).post(createThought);
+router.route("/").get(thoughtController.getThoughts).post(thoughtController.createThought);
 
 // /api/thoughts/:id
 router
   .route("/:id")
-  .get(getThoughtById)
-  .put(updateThought)
-  .delete(deleteThought);
+  .get(thoughtController.getThoughtById)
+  .put(thoughtController.updateThought)
+  .delete(thoughtController.deleteThought);
 
 // /api/thoughts/:thoughtId/reactions
-router.route("/:thoughtId/reactions").post(addReaction);
+router.route("/:thoughtId/reactions").post(thoughtController.addReaction);
 
 // /api/thoughts/:thoughtId/reactions/:reactionId
-router.route("/:thoughtId/reactions/:reactionId").delete(removeReaction);
+router.route("/:thoughtId/reactions/:reactionId").delete(thoughtController.removeReaction);
 
 export default router;

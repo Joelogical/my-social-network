@@ -35,12 +35,15 @@ const reactionSchema = new Schema<IReaction>(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp: Date) => new Date(timestamp).toLocaleString(),
     },
   },
   {
     toJSON: {
       getters: true,
+      transform: (_doc, ret) => {
+        ret.createdAt = new Date(ret.createdAt).toLocaleString();
+        return ret;
+      },
     },
     id: false,
   }
@@ -57,7 +60,6 @@ const thoughtSchema = new Schema<IThought>(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp: Date) => new Date(timestamp).toLocaleString(),
     },
     username: {
       type: String,
@@ -74,6 +76,10 @@ const thoughtSchema = new Schema<IThought>(
     toJSON: {
       virtuals: true,
       getters: true,
+      transform: (_doc, ret) => {
+        ret.createdAt = new Date(ret.createdAt).toLocaleString();
+        return ret;
+      },
     },
     id: false,
   }

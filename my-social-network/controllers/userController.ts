@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Types } from "mongoose";
+import mongoose from "mongoose";
 import User, { IUser } from "../models/User";
 import Thought from "../models/Thought";
 
